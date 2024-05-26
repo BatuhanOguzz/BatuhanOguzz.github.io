@@ -1,0 +1,55 @@
+.AnaSayfaHeader {
+    background-color: red;
+    color: white;
+    padding: 20px;
+    width: 1400px;
+    text-align: left;
+    margin-top: -10px;
+    margin-left: 750px;
+    border-radius: 5px;
+    font-size: 25px;
+}
+.AnaSayfaHeader .logo {
+    width: 25px; 
+    height: 25px; 
+    
+    margin-top: 0px; 
+}
+.AnaSayfaHeader img {
+    border-color: black;
+    width: 30px; 
+    height: auto; 
+}
+
+.w3-display-left{
+    left: 700px;
+}
+.w3-display-right{
+    right: 600px;
+}
+.randevu-button{
+    margin-left: 900px;
+    margin-top: 1000px;
+    height: 60px;
+    width: 250px
+    
+    
+    
+
+}
+.w3-button{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+
+    
+}
+
+.rateusbutton{
+    margin-top:-90px;
+    margin-left: 1700px;
+    height: 120px;
+    width: 150px
+    
+}

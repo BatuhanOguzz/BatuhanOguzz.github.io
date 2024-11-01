@@ -396,7 +396,7 @@
             }
         }
     </style>
-    <script src="client.js"></script>
+    <script src="Chatbot.js"></script>
 </head>
 <body>
     <!-- Header Bölümü -->
@@ -506,14 +506,31 @@
         <div class="chat-header">
             <h3>Chatbot</h3>
         </div>
-        <div class="chat-messages">
+        <div class="chat-messages" id="chatMessages">
             <!-- Mesajlar buraya gelecek -->
         </div>
         <div class="chat-input">
-            <input type="text" placeholder="Mesajınızı yazın...">
-            <button><i class="fas fa-paper-plane"></i></button>
+            <input type="text" id="userInput" placeholder="Mesajınızı yazın...">
+            <button id="sendButton"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
+
+    <script>
+        document.getElementById('sendButton').addEventListener('click', async () => {
+            const userInput = document.getElementById('userInput').value;
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput })
+            });
+
+            const data = await response.json();
+            document.getElementById('chatMessages').innerHTML += `<div>User: ${userInput}</div><div>Chatbot: ${data}</div>`;
+            document.getElementById('userInput').value = ''; // Giriş alanını temizle
+        });
+    </script>
 
     <!-- İletişim Modal -->
     <div id="contactModal" class="modal">

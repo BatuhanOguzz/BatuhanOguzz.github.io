@@ -1,33 +1,30 @@
-const apiKey = 'YOUR_OPENAI_API_KEY'; // OpenAI API anahtarınızı buraya ekleyin
+const express = require('express');
+const fetch = require('node-fetch');
+require('dotenv').config();
 
-async function sendMessageToChatbot(message) {
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+app.post('/api/chat', async (req, res) => {
+    const message = req.body.message;
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
         },
         body: JSON.stringify({
-            model: 'gpt-3.5-turbo', // veya kullanmak istediğiniz model
+            model: 'gpt-3.5-turbo',
             messages: [{ role: 'user', content: message }]
         })
     });
 
     const data = await response.json();
-    return data.choices[0].message.content; // Yanıtı döndür
-}
+    res.json(data.choices[0].message.content);
+});
 
-document.querySelector('.chat-input button').addEventListener('click', async () => {
-    const inputField = document.querySelector('.chat-input input');
-    const userMessage = inputField.value;
-    inputField.value = '';
-
-    // Kullanıcı mesajını göster
-    const messagesContainer = document.querySelector('.chat-messages');
-    messagesContainer.innerHTML += `<div>User: ${userMessage}</div>`;
-
-    // Chatbot yanıtını al
-    const botResponse = await sendMessageToChatbot(userMessage);
-    messagesContainer.innerHTML += `<div>Chatbot: ${botResponse}</div>`;
-    messagesContainer.scrollTop = messagesContainer.scrollHeight; // Aşağı kaydır
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });

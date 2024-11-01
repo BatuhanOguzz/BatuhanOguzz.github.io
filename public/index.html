@@ -275,6 +275,27 @@
             flex-grow: 1;
             padding: 1rem;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Mesajlar arasında boşluk */
+        }
+
+        .chat-message {
+            max-width: 80%; /* Mesaj balonlarının genişliği */
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+            position: relative;
+        }
+
+        .chat-message.user {
+            background-color: #9C8B7C; /* Kullanıcı mesaj rengi */
+            align-self: flex-end; /* Kullanıcı mesajını sağa hizala */
+        }
+
+        .chat-message.bot {
+            background-color: #BDAC97; /* Bot mesaj rengi */
+            align-self: flex-start; /* Bot mesajını sola hizala */
         }
 
         .chat-input {
@@ -518,6 +539,11 @@
     <script>
         document.getElementById('sendButton').addEventListener('click', async () => {
             const userInput = document.getElementById('userInput').value;
+            const messagesContainer = document.getElementById('chatMessages');
+
+            // Kullanıcı mesajını göster
+            messagesContainer.innerHTML += `<div class="chat-message user"> ${userInput}</div>`;
+
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
@@ -527,8 +553,10 @@
             });
 
             const data = await response.json();
-            document.getElementById('chatMessages').innerHTML += `<div>User: ${userInput}</div><div>Chatbot: ${data}</div>`;
+            // Chatbot yanıtını göster
+            messagesContainer.innerHTML += `<div class="chat-message bot"> ${data}</div>`;
             document.getElementById('userInput').value = ''; // Giriş alanını temizle
+            messagesContainer.scrollTop = messagesContainer.scrollHeight; // Aşağı kaydır
         });
     </script>
 

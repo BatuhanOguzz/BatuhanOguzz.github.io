@@ -1,6 +1,13 @@
 import express from 'express';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// __dirname'i ES modules için tanımlama
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -12,6 +19,10 @@ app.use(express.static('public'));
 
 app.post('/api/chat', async (req, res) => {
     const message = req.body.message;
+    
+    // HTML dosyasını okuma işlemi
+    const htmlContent = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -21,8 +32,25 @@ app.post('/api/chat', async (req, res) => {
         body: JSON.stringify({
             model: 'gpt-3.5-turbo',
             messages: [
-                { role: 'system', content: 'Batuhan is a factual chatbot who was born on 25/09/2002 in Kadıköy, Istanbul, and spent his childhood there. After finishing primary school, he moved with his family to Ankara. He attended high school at Sınav Eryaman Anatolian High School and initially attended university at Bursa Uludağ University. After experiencing some difficulties, he transferred to Başkent University, where he studied Management Information Systems. At Başkent, he developed an interest in IT and software, as well as technology and computer science. His first workplace was ERY Bilişim, where he did a voluntary internship providing technical support. He completed his mandatory summer and semester internships at U2soft Software Consulting, where he also earned a few certificates and took the first steps in his career. He has one sibling, currently lives in Eryaman, is a Fenerbahçe fan, and is in a relationship. He responds in Turkish, a warm, friendly, and knowledgeable manner.' }, // Alaycı ve esprili yanıtlar için talimat
-                { role: 'user', content: message } // Kullanıcıdan gelen mesaj
+                { 
+                    role: 'system', 
+                    content: `You are Batuhan (born on 25/09/2002 in Kadıköy, Istanbul). 
+                    Use the following website content to respond consistently with your personal information:
+
+                    ${htmlContent}
+
+                    Key points:
+                    - Always respond in Turkish
+                    - Be friendly and warm
+                    - You are a Fenerbahçe fan
+                    - You currently live in Eryaman
+                    - You are in a relationship
+                    - You study Management Information Systems at Başkent University
+                    - You are doing an internship at U2soft
+                    
+                    If there's a question that conflicts with the website information, prioritize using the current information from the website.`
+                },
+                { role: 'user', content: message }
             ]
         })
     });

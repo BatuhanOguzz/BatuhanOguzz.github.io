@@ -263,7 +263,6 @@
             display: flex;
             flex-direction: column;
             transition: all 0.3s ease;
-            z-index: 1000;
         }
 
         .chat-header {
@@ -274,11 +273,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .chat-header h3 {
-            margin: 0;
-            font-size: 1rem;
         }
 
         .chat-controls {
@@ -297,6 +291,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 14px;
         }
 
         .chat-controls button:hover {
@@ -311,15 +306,12 @@
             flex-grow: 1;
             padding: 1rem;
             overflow-y: auto;
-            background: #fff;
         }
 
         .chat-input {
             display: flex;
             padding: 1rem;
-            background: #fff;
             border-top: 1px solid #eee;
-            border-radius: 0 0 10px 10px;
         }
 
         .chat-input input {
@@ -328,7 +320,6 @@
             border: 1px solid #ddd;
             border-radius: 20px;
             margin-right: 0.5rem;
-            font-size: 0.9rem;
         }
 
         .chat-input button {
@@ -340,13 +331,8 @@
             cursor: pointer;
         }
 
-        .chat-input button:hover {
-            background: #8a7b6c;
-        }
-
-        /* Chatbot durumları */
         .chatbot.minimized {
-            height: 60px !important;
+            height: 60px;
         }
 
         .chatbot.minimized .chat-messages,
@@ -355,35 +341,30 @@
         }
 
         .chatbot.maximized {
-            width: 80% !important;
-            height: 80% !important;
-            top: 10% !important;
-            right: 10% !important;
-            bottom: auto;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            right: 10%;
         }
 
-        /* Mesaj stilleri */
-        .message {
-            margin: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            max-width: 80%;
-            word-wrap: break-word;
+        @media (max-width: 768px) {
+            .chatbot {
+                width: 100%;
+                height: 50vh;
+                bottom: 0;
+                right: 0;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .chatbot.maximized {
+                width: 100%;
+                height: 100%;
+                top: 0;
+                right: 0;
+            }
         }
 
-        .user-message {
-            background-color: #9C8B7C;
-            color: white;
-            margin-left: auto;
-        }
-
-        .bot-message {
-            background-color: #f0f0f0;
-            color: #333;
-            margin-right: auto;
-        }
-
-        /* Mobil uyumluluk */
+        /* Responsive Tasarım */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -399,13 +380,6 @@
                 bottom: 0;
                 right: 0;
                 border-radius: 10px 10px 0 0;
-            }
-
-            .chatbot.maximized {
-                width: 100% !important;
-                height: 100% !important;
-                top: 0 !important;
-                right: 0 !important;
             }
         }
 
@@ -482,7 +456,6 @@
             }
         }
     </style>
-    <script src="Chatbot.js"></script>
 </head>
 <body>
     <!-- Header Bölümü -->
@@ -503,7 +476,7 @@
     <section id="home">
         <div class="profile-container">
             <div class="profile-image">
-                <img src="src/image.png" alt="Profil Fotoğrafı">
+                <img src="image.png" alt="Profil Fotoğrafı">
             </div>
             <div class="profile-text">
                 <h1>Merhaba, Ben Batuhan</h1>
@@ -558,7 +531,7 @@
                 <div class="timeline-content">
                     <h3>ERY Systems</h3>
                     <p>Intern</p>
-                    <p>ERY Bilişim'de IT ekibine destek sağlayarak, problem çözme becerilerimi ve güçlü iletişim yeteneklerimi etkin bir şekilde kullandım. Teknik destek sağlamak ve IT ile ilgili sorunları çözmek amacıyla, meslektaşlarımla iş birliği yaparak bilgisayar sistemlerinin kesintisiz çalışmasını sağladım. Bu süreçte, çeşitli programlama dilleri ve araçlar konusundaki bilgi birikimimi kullanarak teknik zorluklara etkin çözümler ürettim. Bu deneyim, öğrenim sürecimde teorik bilgiyi pratikle birleştirerek yetkinliklerimi geliştirmeme katkı sağladı.</p>
+                    <p>ERY Bilişim'de IT ekibine destek sağlayarak, problem çözme becerilerimi ve güçlü iletişim yeteneklerimi etkin bir şekilde kullandım. Teknik destek sağlamak ve IT ile ilgili sorunları çözmek amacıyla, meslektaşlarımla iş birliği yaparak bilgisayar sistemlerinin kesintisiz alışmasını sağladım. Bu süreçte, çeşitli programlama dilleri ve araçlar konusundaki bilgi birikimimi kullanarak teknik zorluklara etkin çözümler ürettim. Bu deneyim, öğrenim sürecimde teorik bilgiyi pratikle birleştirerek yetkinliklerimi geliştirmeme katkı sağladı.</p>
                 </div>
             </div>
             <div class="timeline-item">
@@ -566,7 +539,7 @@
                 <div class="timeline-content">
                     <h3>U2 Soft</h3>
                     <p>Junior Developer</p>
-                    <p>U2 Soft'ta yazılım geliştirme süreçlerine aktif olarak katılarak, projelerde görev aldım ve teknik yetkinliklerimle hızlı öğrenme kabiliyetimi geliştirme fırsatı buldum. Projelerde yazdığım kodları test etme ve hata düzeltme süreçlerinde kritik düşünme becerilerimi etkin bir şekilde kullanarak, yazılımın kalitesini artırmaya katkı sağladım. Bu deneyim, problem çözme ve iş birliği yeteneklerimi güçlendirdi. Şirketin talebi üzerine, ilk büyük projem olan "Billtastic" uygulamasını geliştirdim ve pazarlama faaliyetlerini yönettim. Ayrıca, çeşitli seminerlere ve kurslara katılarak bu alanda sertifikalar kazandım. Halen yarı zamanlı olarak çalışma sürecime devam etmekteyim.</p>
+                    <p>U2 Soft'ta yazılım geliştirme süreçlerine aktif olarak katılarak, projelerde görev aldım ve teknik yetkinliklerimle hızlı öğrenme kabiliyetimi geliştirme fırsatı buldum. Projelerde yazdığım kodları test etme ve hata düzeltme süreçlerinde kritik düşünme becerilerimi etkin bir şekilde kullanarak, yazılımın kalitesini artırmaya katkı sağladım. Bu deneyim, problem çözme ve iş birliği yeteneklerimi güçlendirdi. Şirketin talebi üzerine, ilk büyük projem olan "Billtastic" uygulamasını geliştirdim ve pazarlama faaliyetlerini yönettim. Ayrıca, ��eşitli seminerlere ve kurslara katılarak bu alanda sertifikalar kazandım. Halen yarı zamanlı olarak çalışma sürecime devam etmekteyim.</p>
                 </div>
             </div>
         </div>
@@ -577,7 +550,7 @@
         <h2 class="section-title">Projeler</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <img src="src/Proje1.png" alt="Proje 1">
+                <img src="Proje1.png" alt="Proje 1">
                 <h3>Billtastic</h3>
                 <p>Billtastic'in temel amacı, kullanıcıların faturalarını düzenli olarak takip etmelerini sağlamak ve otomatik hesaplama işlevleri sunarak süreçleri kolaylaştırmaktır. Programın sunduğu zamanlayıcı ve takvim özellikleri, müşterilere cari faturalar hakkında otomatik e-posta bildirimleri göndermeyi mümkün kılar. Bu sayede, bir muhasebecinin bir günlük iş gücü, yalnızca 1 dakikalık bir ayarlama ile otomatikleştirilmiş hale gelmiştir.</p>
                 <div class="project-links">
@@ -597,7 +570,7 @@
                 <button onclick="resetChatbot()"><i class="fas fa-redo"></i></button>
             </div>
         </div>
-        <div class="chat-messages" id="chat-messages">
+        <div class="chat-messages">
             <!-- Mesajlar buraya gelecek -->
         </div>
         <div class="chat-input">
@@ -605,83 +578,6 @@
             <button><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
-
-    <script>
-        // Chatbot durumlarını yönetme
-        let isMinimized = false;
-        let isMaximized = false;
-
-        function minimizeChatbot() {
-            const chatbot = document.getElementById('chatbot');
-            isMinimized = !isMinimized;
-            if (isMaximized) {
-                isMaximized = false;
-                chatbot.classList.remove('maximized');
-            }
-            chatbot.classList.toggle('minimized');
-        }
-
-        function maximizeChatbot() {
-            const chatbot = document.getElementById('chatbot');
-            isMaximized = !isMaximized;
-            if (isMinimized) {
-                isMinimized = false;
-                chatbot.classList.remove('minimized');
-            }
-            chatbot.classList.toggle('maximized');
-        }
-
-        function resetChatbot() {
-            const chatbot = document.getElementById('chatbot');
-            isMinimized = false;
-            isMaximized = false;
-            chatbot.classList.remove('minimized', 'maximized');
-        }
-
-        // Mesaj gönderme ve alma işlemleri
-        document.querySelector('.chat-input button').addEventListener('click', sendMessage);
-        document.querySelector('.chat-input input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') sendMessage();
-        });
-
-        function sendMessage() {
-            const input = document.querySelector('.chat-input input');
-            const message = input.value.trim();
-            if (!message) return;
-
-            addMessage('user', message);
-            input.value = '';
-
-            // API isteği buraya gelecek
-            fetch('/api/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message })
-            })
-            .then(response => response.json())
-            .then(response => {
-                addMessage('bot', response);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                addMessage('bot', 'Üzgünüm, bir hata oluştu.');
-            });
-        }
-
-        function addMessage(sender, text) {
-            const messagesDiv = document.querySelector('.chat-messages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}-message`;
-            messageDiv.innerHTML = `<p>${text}</p>`;
-            messagesDiv.appendChild(messageDiv);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
-
-        // Başlangıç mesajı
-        addMessage('bot', 'Merhaba! Ben Batuhan\'ın sanal asistanıyım. Size nasıl yardımcı olabilirim?');
-    </script>
 
     <!-- İletişim Modal -->
     <div id="contactModal" class="modal">
@@ -710,6 +606,66 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
+    }
+
+    document.querySelector('.chat-input button').addEventListener('click', sendMessage);
+    document.querySelector('.chat-input input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    function sendMessage() {
+        const input = document.querySelector('.chat-input input');
+        const message = input.value.trim();
+        if (!message) return;
+
+        // Kullanıcı mesajını ekle
+        addMessage('user', message);
+        input.value = '';
+
+        // API'ye istek gönder
+        fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message })
+        })
+        .then(response => response.json())
+        .then(response => {
+            addMessage('bot', response);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            addMessage('bot', 'Üzgünüm, bir hata oluştu.');
+        });
+    }
+
+    function addMessage(sender, text) {
+        const messagesDiv = document.querySelector('.chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}-message`;
+        messageDiv.innerHTML = `<p>${text}</p>`;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    // Başlangıç mesajı
+    addMessage('bot', 'Merhaba! Ben Batuhan\'ın sanal asistanıyım. Size nasıl yardımcı olabilirim?');
+
+    // Yeni eklenen fonksiyonlar
+    function minimizeChatbot() {
+        const chatbot = document.getElementById('chatbot');
+        chatbot.classList.toggle('minimized');
+    }
+
+    function maximizeChatbot() {
+        const chatbot = document.getElementById('chatbot');
+        chatbot.classList.toggle('maximized');
+    }
+
+    function resetChatbot() {
+        const chatbot = document.getElementById('chatbot');
+        chatbot.classList.remove('minimized', 'maximized');
     }
     </script>
 </body>

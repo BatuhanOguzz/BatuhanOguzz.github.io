@@ -4,18 +4,20 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-// __dirname'i ES modules için tanımlama
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-dotenv.config();
+const __dirname = dirname(__filename); // __dirname burada tanımlanıyor
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use(express.static('public'));
+dotenv.config();
+
+// Kök dizindeki statik dosyaları sunma
+app.use(express.static(path.join(__dirname))); // __dirname, dosyanın bulunduğu dizini belirtir
+
+app.use(express.json()); // JSON gövde verilerini işlemek için middleware ekleniyor
 
 app.post('/api/chat', async (req, res) => {
     const message = req.body.message;
@@ -59,6 +61,7 @@ app.post('/api/chat', async (req, res) => {
     res.json(data.choices[0].message.content);
 });
 
+// Uygulamanızı başlatma
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });

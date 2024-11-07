@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolyo Sitesi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Genel Stiller */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #FAF8F0;
+        }
+
+        h1, h2, h3, .section-title {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-links li a {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .profile-text h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-text h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .project-card h3 {
+            font-size: 1.6rem;
+            padding: 1.2rem 1rem 0.8rem;
+        }
+
+        .project-card p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .skill-tags span {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Header Stili */
+        header {
+            background-color: #BDAC97;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #9C8B7C;
+        }
+
+        /* Ana Sayfa Stili */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 60px;
+        }
+
+        .profile-container {
+            text-align: center;
+        }
+
+        .profile-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-links a {
+            color: #9C8B7C;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #BDAC97;
+        }
+
+        /* Bölüm Stilleri */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+        }
+
+        /* Yetenekler Stili */
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .skill-tags span {
+            background-color: #9C8B7C;
+            color: #FAF8F0;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Deneyim Timeline Stili */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            border-left: 2px solid #BDAC97;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #9C8B7C;
+        }
+
+        /* Projeler Grid Stili */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: #FAF8F0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(156, 139, 124, 0.15);
+            border: 1px solid #BDAC97;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #FFFFFF;
+            padding: 10px;
+            border-bottom: 1px solid #BDAC97;
+        }
+
+        .project-card h3 {
+            background-color: #BDAC97;
+            color: #FAF8F0;
+            padding: 1.2rem 1rem 0.8rem;
+            margin: 0;
+        }
+
+        .project-card p {
+            padding: 1.5rem 1rem;
+            color: #333;
+        }
+
+        .project-links {
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            background-color: #FAF8F0;
+            border-top: 1px solid #BDAC97;
+        }
+
+        .project-links a {
+            color: #9C8B7C;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .project-links a:hover {
+            color: #BDAC97;
+        }
+
+        /* Chatbot Stili */
+        .chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .chat-header {
+            background: #9C8B7C;
+            color: #FAF8F0;
+            padding: 1rem;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .chat-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-controls button {
+            background: none;
+            border: none;
+            color: #FAF8F0;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-controls button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .chat-controls i {
+            font-size: 14px;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #fff;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            background: #fff;
+            border-top: 1px solid #eee;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .chat-input button {
+            background: #9C8B7C;
+            color: #FAF8F0;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background: #8a7b6c;
+        }
+
+        /* Chatbot durumları */
+        .chatbot.minimized {
+            height: 60px !important;
+        }
+
+        .chatbot.minimized .chat-messages,
+        .chatbot.minimized .chat-input {
+            display: none;
+        }
+
+        .chatbot.maximized {
+            width: 80% !important;
+            height: 80% !important;
+            top: 10% !important;
+            right: 10% !important;
+            bottom: auto;
+        }
+
+        /* Mesaj stilleri */
+        .message {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: #9C8B7C;
+            color: white;
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background-color: #f0f0f0;
+            color: #333;
+            margin-right: auto;
+        }
+
+        /* Mobil uyumluluk */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .profile-container {
+                padding: 0 1rem;
+            }
+            
+            .chatbot {
+                width: 100%;
+                height: 50vh;
+                bottom: 0;
+                right: 0;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .chatbot.maximized {
+                width: 100% !important;
+                height: 100% !important;
+                top: 0 !important;
+                right: 0 !important;
+            }
+        }
+
+        /* Modal Stilleri */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #FAF8F0;
+            margin: 15% auto;
+            padding: 30px;
+            border: 1px solid #BDAC97;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .close-button {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            color: #9C8B7C;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover {
+            color: #BDAC97;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        .contact-info p {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .contact-info i {
+            color: #9C8B7C;
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .contact-info a {
+            color: #9C8B7C;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #BDAC97;
+        }
+
+        /* Mobil için düzenleme */
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 30% auto;
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+    <script src="Chatbot.js"></script>
+</head>
+<body>
+    <!-- Header Bölümü -->
+    <header>
+        <nav>
+            <div class="logo"></div>
+            <ul class="nav-links">
+                <li><a href="#home">Ana Sayfa</a></li>
+                <li><a href="#about">Hakkımda</a></li>
+                <li><a href="#experience">Deneyim</a></li>
+                <li><a href="#projects">Projeler</a></li>
+                <li><a href="#" onclick="openContactModal()">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Ana Sayfa Bölümü -->
+    <section id="home">
+        <div class="profile-container">
+            <div class="profile-image">
+                <img src="src/image.png" alt="Profil Fotoğrafı">
+            </div>
+            <div class="profile-text">
+                <h1>Merhaba, Ben Batuhan</h1>
+                <h2>Developer</h2>
+                <div class="social-links">
+                    <a href="https://github.com/BatuhanOguzz" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/batuhan-o%C4%9Fuz-18591722b/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hakkımda Bölümü -->
+    <section id="about">
+        <h2 class="section-title">Hakkımda</h2>
+        <div class="about-content">
+            <p>Merhaba! Ben yazılım geliştirme ve yapay zeka alanlarına ilgi duyan bir üniversite öğrencisiyim. Teknolojinin nasıl çalıştığını anlamak ve sorunları çözmek benim için oldukça keyif verici. Analitik düşünme yeteneğimle, kullanıcı dostu ve yenilikçi projeler üretmeyi hedefliyorum.
+
+                Yeni teknolojileri ve sektördeki gelişmeleri takip ederek kendimi sürekli geliştirmeye çalışıyorum. Ekip çalışmasına uyum sağlamakta ve işbirliği yaparak daha iyi sonuçlar elde etmekte oldukça yetkinim. Projelerde karşılaştığım zorlukları aşmak için yaratıcı çözümler bulmak benim için hem bir öğrenme fırsatı hem de keyifli bir süreç.
+                
+                Kendimi yazılım alanında daha da geliştirmek ve öğrendiklerimi gerçek projelerde uygulamak istiyorum. Gelecekte, katkıda bulunabileceğim yaratıcı projelerle hem kendimi hem de çevremdekileri geliştirmek için sabırsızlanıyorum. </p>
+                
+            <div class="skills">
+                <h3>Yetenekler</h3>
+                <div class="skill-tags">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                    <span>PHP</span>
+                    <span>C++</span>
+                    <span>C#</span>
+                    <span>Java</span>
+                    <span>Unreal Engine 5</span>
+                    <span>Blender</span>
+                    <span>Microsoft Office</span>
+                    <span>Teamwork</span>
+                    <span>GitHub&Git</span>
+                    <span>C1 English</span>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deneyim Bölümü -->
+    <section id="experience">
+        <h2 class="section-title">Deneyim</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2023 - 2024</div>
+                <div class="timeline-content">
+                    <h3>ERY Systems</h3>
+                    <p>Intern</p>
+                    <p>ERY Bilişim'de IT ekibine destek sağlayarak, problem çözme becerilerimi ve güçlü iletişim yeteneklerimi etkin bir şekilde kullandım. Teknik destek sağlamak ve IT ile ilgili sorunları çözmek amacıyla, meslektaşlarımla iş birliği yaparak bilgisayar sistemlerinin kesintisiz çalışmasını sağladım. Bu süreçte, çeşitli programlama dilleri ve araçlar konusundaki bilgi birikimimi kullanarak teknik zorluklara etkin çözümler ürettim. Bu deneyim, öğrenim sürecimde teorik bilgiyi pratikle birleştirerek yetkinliklerimi geliştirmeme katkı sağladı.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2024 - Günümüz</div>
+                <div class="timeline-content">
+                    <h3>U2 Soft</h3>
+                    <p>Junior Developer</p>
+                    <p>U2 Soft'ta yazılım geliştirme süreçlerine aktif olarak katılarak, projelerde görev aldım ve teknik yetkinliklerimle hızlı öğrenme kabiliyetimi geliştirme fırsatı buldum. Projelerde yazdığım kodları test etme ve hata düzeltme süreçlerinde kritik düşünme becerilerimi etkin bir şekilde kullanarak, yazılımın kalitesini artırmaya katkı sağladım. Bu deneyim, problem çözme ve iş birliği yeteneklerimi güçlendirdi. Şirketin talebi üzerine, ilk büyük projem olan "Billtastic" uygulamasını geliştirdim ve pazarlama faaliyetlerini yönettim. Ayrıca, çeşitli seminerlere ve kurslara katılarak bu alanda sertifikalar kazandım. Halen yarı zamanlı olarak çalışma sürecime devam etmekteyim.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projeler Bölümü -->
+    <section id="projects">
+        <h2 class="section-title">Projeler</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="public/src/Proje1.png" alt="Proje 1">
+                <h3>Billtastic</h3>
+                <p>Billtastic'in temel amacı, kullanıcıların faturalarını düzenli olarak takip etmelerini sağlamak ve otomatik hesaplama işlevleri sunarak süreçleri kolaylaştırmaktır. Programın sunduğu zamanlayıcı ve takvim özellikleri, müşterilere cari faturalar hakkında otomatik e-posta bildirimleri göndermeyi mümkün kılar. Bu sayede, bir muhasebecinin bir günlük iş gücü, yalnızca 1 dakikalık bir ayarlama ile otomatikleştirilmiş hale gelmiştir.</p>
+                <div class="project-links">
+                    <a href="https://github.com/BatuhanOguzz/Billtastic-1.0.4" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot -->
+    <div class="chatbot" id="chatbot">
+        <div class="chat-header">
+            <h3>Sanal Batuhan</h3>
+            <div class="chat-controls">
+                <button onclick="minimizeChatbot()"><i class="fas fa-minus"></i></button>
+                <button onclick="maximizeChatbot()"><i class="fas fa-expand"></i></button>
+                <button onclick="resetChatbot()"><i class="fas fa-redo"></i></button>
+            </div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Mesajlar buraya gelecek -->
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Mesajınızı yazın...">
+            <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // Chatbot durumlarını yönetme
+        let isMinimized = false;
+        let isMaximized = false;
+
+        function minimizeChatbot() {
+            const chatbot = document.getElementById('chatbot');
+            isMinimized = !isMinimized;
+            if (isMaximized) {
+                isMaximized = false;
+                chatbot.classList.remove('maximized');
+            }
+            chatbot.classList.toggle('minimized');
+        }
+
+        function maximizeChatbot() {
+            const chatbot = document.getElementById('chatbot');
+            isMaximized = !isMaximized;
+            if (isMinimized) {
+                isMinimized = false;
+                chatbot.classList.remove('minimized');
+            }
+            chatbot.classList.toggle('maximized');
+        }
+
+        function resetChatbot() {
+            const chatbot = document.getElementById('chatbot');
+            isMinimized = false;
+            isMaximized = false;
+            chatbot.classList.remove('minimized', 'maximized');
+        }
+
+        // Mesaj gönderme ve alma işlemleri
+        document.querySelector('.chat-input button').addEventListener('click', sendMessage);
+        document.querySelector('.chat-input input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        function sendMessage() {
+            const input = document.querySelector('.chat-input input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            addMessage('user', message);
+            input.value = '';
+
+            // API isteği buraya gelecek
+            fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message })
+            })
+            .then(response => response.json())
+            .then(response => {
+                addMessage('bot', response);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                addMessage('bot', 'Üzgünüm, bir hata oluştu.');
+            });
+        }
+
+        function addMessage(sender, text) {
+            const messagesDiv = document.querySelector('.chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.innerHTML = `<p>${text}</p>`;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Başlangıç mesajı
+        addMessage('bot', 'Merhaba! Ben Batuhan\'ın sanal asistanıyım. Size nasıl yardımcı olabilirim?');
+    </script>
+
+    <!-- İletişim Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeContactModal()">&times;</span>
+            <h2>İletişim Bilgileri</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> Telefon: <a href="tel:+905555555555">+90 535 068 74 69</a></p>
+                <p><i class="fas fa-envelope"></i> E-posta: <a href="mailto:batuhan@example.com">batuhan.oguz06@outlook.com</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function openContactModal() {
+        document.getElementById("contactModal").style.display = "block";
+    }
+
+    function closeContactModal() {
+        document.getElementById("contactModal").style.display = "none";
+    }
+
+    // Modal dışına tıklandığında kapanması için
+    window.onclick = function(event) {
+        var modal = document.getElementById("contactModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+</body>
+</html>
